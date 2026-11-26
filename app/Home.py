@@ -56,7 +56,7 @@ st.markdown("Share of respondents giving the answer shown, among those who answe
 order = [i.label for i in INDICATORS]
 fig = ui.dot_plot(table, y="indicator", x="share", color="zone", order=order, colors=ui.ZONE_COLORS)
 st.plotly_chart(ui.style(fig, height=400, x_title="Share of respondents who answered (%)"),
-                use_container_width=True)
+                width="stretch")
 
 n_min = table.groupby("zone")["n"].min().to_dict()
 ui.small_group_warning(n_min)
@@ -73,7 +73,7 @@ with st.expander("Definitions and data table"):
     st.dataframe(
         table.assign(share=lambda t: (t.share * 100).round(1))
              .rename(columns={"share": "share (%)"})[["indicator", "zone", "share (%)", "n"]],
-        hide_index=True, use_container_width=True,
+        hide_index=True, width="stretch",
     )
 
 st.divider()
@@ -85,7 +85,7 @@ reasons = avoid_reasons_by_zone(df)
 reason_order = (reasons[reasons.group == pop.FRANCE].sort_values("share", ascending=False)["answer"].tolist())
 fig2 = ui.grouped_bars(reasons, "answer", "share", "group", reason_order, ui.ZONE_COLORS)
 st.plotly_chart(ui.style(fig2, height=430, x_title="Share of respondents who answered (%)"),
-                use_container_width=True)
+                width="stretch")
 n_reason = reasons.groupby("group")["n"].first().reindex(pop.ZONES).fillna(0).astype(int)
 ui.small_group_warning(n_reason.to_dict())
 st.caption(
