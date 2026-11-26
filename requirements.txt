@@ -1,0 +1,11 @@
+# Interface and charts
+streamlit>=1.40
+plotly>=5.24
+# Analysis
+pandas>=2.2
+pyarrow>=17
+requests>=2.32
+# Tests
+pytest>=8
+# Our own analysis package (src/so_ai), installed in editable mode
+-e .
